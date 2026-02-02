@@ -1,0 +1,21 @@
+FROM alpine:3.23
+
+# Following commands are for installing CA certs (for proper functioning of HTTPS and other TLS)
+RUN apk --update add ca-certificates && \
+    rm -rf /var/cache/apk/*
+
+# Add new user 'appuser'
+RUN adduser -D appuser
+USER appuser
+
+# Copy the pre-built binary from GoReleaser
+ARG TARGETPLATFORM
+COPY ${TARGETPLATFORM}/claude-gitleaks /home/appuser/main
+
+WORKDIR /home/appuser/
+
+# Since running as a non-root user, port bindings < 1024 is not possible
+# 8000 for HTTP; 8443 for HTTPS;
+EXPOSE 8000
+
+ENTRYPOINT ["./main"]

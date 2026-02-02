@@ -1,0 +1,93 @@
+title = "Recommended gitleaks configuration"
+
+# You should add your own rules, if you have any internal rulings
+
+# useDefault and path can NOT be used at the same time. Choose one.
+[extend]
+# useDefault will extend the default gitleaks config built in to the binary
+# the latest version is located at:
+# https://github.com/gitleaks/gitleaks/blob/master/config/gitleaks.toml
+useDefault = true
+
+# Note the password composite comes from here: https://github.com/gitleaks/gitleaks/issues/1958
+
+[[rules]]
+id = "password-composite"
+description = "generic username and password combination in close proximity"
+regex = '''(?i)(?:passw(?:or)?d|pw|pass(?:phrase)?)(?:[ \t\w.-]{0,20})[\s'"]{0,3}(?:=|>|:{1,3}=|\|\||:|=>|\?=)[\\\x60'"\s=]{0,5}([\w.=\-\\&%_}{#\]\[@!*]{5,250}|[a-z0-9][a-z0-9+/]{11,}={0,3})(?:[\\\x60'"\s;]|\\[nr]|$)'''
+entropy = 3.0
+keywords = [
+    "pass",
+    "pw",
+]
+[[rules.allowlists]]
+description = "Allow common password placeholder values"
+regexTarget = "secret"
+regexes = [
+    '''^\*+$''',  # All asterisks
+    '''^\.+$''',  # All dots
+    '''(?i)(password|changeme|your[_-]?password|example|placeholder|dummy|sample|test)$''',
+    '''^\$\{[^}]+\}$''',  # Template variables like ${PASSWORD}
+    '''^<[^>]+>$''',  # Placeholder like <password>
+    '''(?i)^\\u[0-9]{4}.{0,2}$''', # SINGLE Unicode sequences \u1234
+    '''^{[^}]+\}$''',  # Template variables like {PASSWORD}
+]
+stopwords = [
+    '''12345''',
+    '''string''',
+    '''User-Agent''',
+    '''password''',
+    # Common test passwords and placeholders
+    '''abc123''',
+    '''pass4321''',
+    '''letmein''',
+    '''let_me_in''',
+    '''mypassword''',
+    '''USERNAME''',
+    '''sk_test_123''',
+    '''passphrase''',
+    '''changeme''',
+    '''secret''',
+    '''admin''',
+    '''root''',
+    '''user''',
+    '''test''',
+    '''example''',
+    '''placeholder''',
+    '''dummy''',
+    '''sample''',
+    '''temp''',
+    '''temporary''',
+    '''default''',
+    '''localhost''',
+    '''database''',
+    '''username''',
+    '''yourpassword''',
+    # add more here
+]
+[[rules.required]]
+id = "username-pattern"
+withinLines = 6
+withinColumns = 200
+
+[[rules]]
+id = "username-pattern"
+description = "Username pattern for composite rule"
+regex = '''(?i)(user(?:name)?|login|email|uid|account)(?:[ \t\w.-]{0,20})[\s'"]{0,3}(?:=|>|:{1,3}=|\|\||:|=>|\?=)[\\\x60'"\s=]{0,5}([\w.=\-\\&%_}{]{4,250}|[a-z0-9][a-z0-9+/]{11,}={0,3})(?:[\\\x60'"\s;]|\\[nr]|$)'''
+tags = ["auxiliary"]
+skipReport = true
+
+[[rules]]
+id = "generic-api-key-with-special-chars"
+description = "Generic API key with special characters (10+ chars)"
+regex = '''(?i)(?:api[_-]?key|token|secret|key|auth|credential|access[_-]?key)(?:[ \t\w.-]{0,20})[\s'"]{0,3}(?:=|>|:{1,3}=|\|\||:|=>|\?=)[\\\x60'"\s=]{0,5}([\w\-&^!@#$%*+=.]{10,})(?:[\\\x60'"\s;,]|\\[nr]|$)'''
+entropy = 1
+secretGroup = 1
+keywords = [
+    "api",
+    "key",
+    "token",
+    "secret",
+    "auth",
+    "credential",
+]

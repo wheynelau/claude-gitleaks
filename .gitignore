@@ -1,0 +1,6 @@
+*.env
+
+tmp
+.tmp
+# Added by goreleaser init:
+dist/

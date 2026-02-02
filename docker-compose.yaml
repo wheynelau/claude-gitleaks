@@ -1,0 +1,30 @@
+services:
+  jaeger:
+    image: jaegertracing/jaeger:latest
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    ports:
+      - "16686:16686" # UI
+      # - "4318:4318" # Not really needed to be exposed
+    networks:
+      - proxy-network
+
+  gitleaks-proxy:
+    build: .
+    environment:
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://jaeger:4318
+      - OTEL_SERVICE_NAME=gitleaks-proxy
+    volumes:
+      - ./.gitleaks.toml:/home/appuser/gitleaks.toml:ro
+    command: |
+      --config /home/appuser/gitleaks.toml
+    ports:
+      - "8000:8000"
+    depends_on:
+      - jaeger
+    networks:
+      - proxy-network
+
+networks:
+  proxy-network:
+    driver: bridge
