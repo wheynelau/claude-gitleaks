@@ -28,8 +28,13 @@ docker pull ghcr.io/wheynelau/claude-gitleaks:latest
 
 The compose file provided is for building and not using the remotely available container
 
+```
+docker compose up -d --build
+```
 
-Then in a claude terminal:
+### Claude code side
+
+Then in another terminal:
 ```bash
 # 8000 is the default
 export ANTHROPIC_BASE_URL="http://localhost:8000"
