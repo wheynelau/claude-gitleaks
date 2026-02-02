@@ -12,7 +12,8 @@
       "matchManagers": ["gomod"],
       "matchPackageNames": ["github.com/zricethezav/gitleaks/v8"],
       "enabled": true,
-      "automerge": true
+      "automerge": true,
+      "ignoreTests": true
     }
   ],
   "postUpdateOptions": ["gomodTidy"]
