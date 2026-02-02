@@ -2,14 +2,10 @@
 
 A proxy server for the Anthropic API that detects and redacts leaked API keys and secrets from requests.
 
-## Features
+## CI
 
-- Scans all requests for leaked secrets using gitleaks
-- Redacts detected secrets or rejects requests entirely
-- Includes a `/scan` endpoint for checking text without proxying
-- OpenTelemetry instrumentation for distributed tracing
-- Structured JSON logging
-- Custom gitleaks configuration that extends the default rules with additional patterns for passwords, usernames, and API keys
+- A cron will check gitleaks for any minor changes. This should help find new updates to the keys where possible
+- Upon new packages, the build process will update a new tag for this repo
 
 ## Usage
 
@@ -49,6 +45,16 @@ claude
 This is just a simple proxy that reads every request from claude code, checks for sensitive keys using `gitleaks`, then replaces it with `<REDACTED_KEY>`. However, note that its not 100%, and its best to couple this with other best practices, like hooks or fake keys. Where this may shine is when `claude` does things like reading encrypted secrets, like if you have your secrets in a remote and for some reason `claude` can run things like `sops` or `aws secretsmanager`. 
 
 Read more about gitleaks: https://github.com/gitleaks/gitleaks
+
+## Features
+
+- Scans all requests for leaked secrets using gitleaks
+- Redacts detected secrets or rejects requests entirely
+- Includes a `/scan` endpoint for checking text without proxying
+- OpenTelemetry instrumentation for distributed tracing
+- Structured JSON logging
+- Custom gitleaks configuration that extends the default rules with additional patterns for passwords, usernames, and API keys
+
 
 ## Issues
 
