@@ -1,0 +1,19 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "packageRules": [
+    {
+      "description": "Disable all updates by default",
+      "matchPackageNames": ["*"],
+      "enabled": false
+    },
+    {
+      "description": "Enable only gitleaks v8 updates",
+      "matchManagers": ["gomod"],
+      "matchPackageNames": ["github.com/zricethezav/gitleaks/v8"],
+      "enabled": true,
+      "automerge": true
+    }
+  ],
+  "postUpdateOptions": ["gomodTidy"]
+}

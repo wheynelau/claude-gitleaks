@@ -32,6 +32,10 @@ The compose file provided is for building and not using the remotely available c
 docker compose up -d --build
 ```
 
+If you would like to use the remote image, its a quick change from `build: .` to `image: ghcr.io/wheynelau/claude-gitleaks:latest`. 
+
+_Note: The docker compose references a .gitleaks.toml file at the root_
+
 ### Claude code side
 
 Then in another terminal:
