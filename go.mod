@@ -6,7 +6,7 @@ require (
 	github.com/anthropics/anthropic-sdk-go v1.20.0
 	github.com/spf13/viper v1.19.0
 	github.com/tidwall/gjson v1.18.0
-	github.com/zricethezav/gitleaks/v8 v8.20.0
+	github.com/zricethezav/gitleaks/v8 v8.21.0
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.54.0
 	go.opentelemetry.io/otel v1.39.0
 	go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploghttp v0.15.0

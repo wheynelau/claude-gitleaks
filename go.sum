@@ -404,6 +404,8 @@ github.com/yuin/goldmark v1.3.5/go.mod h1:mwnBkeHKe2W/ZEtQ+71ViKU8L12m81fl3OWwC1
 github.com/yuin/goldmark v1.4.13/go.mod h1:6yULJ656Px+3vBD8DxQVa3kxgyrAnzto9xy5taEt/CY=
 github.com/zricethezav/gitleaks/v8 v8.20.0 h1:Gtd9SFhe1NTHZaCW/FTlDVPZtEBwwxEov1RYZ61+7xI=
 github.com/zricethezav/gitleaks/v8 v8.20.0/go.mod h1:EgDcqyUTQZtnuUYweb1RK+lwKEX+BYoIXCN16H0TMaM=
+github.com/zricethezav/gitleaks/v8 v8.21.0 h1:O11P5uYwAOWWTpnqla9cxWCweTQWS8hSx9J/0QE5vBY=
+github.com/zricethezav/gitleaks/v8 v8.21.0/go.mod h1:5HpElkNYAzjyv93hZWjohiNol6+nsveKzm9MTgmkWtI=
 github.com/zricethezav/gitleaks/v8 v8.30.0 h1:5heLlxRQkHfXgTJgdQsJhi/evX1oj6i+xBanDu2XUM8=
 github.com/zricethezav/gitleaks/v8 v8.30.0/go.mod h1:M5JQW5L+vZmkAqs9EX29hFQnn7uFz9sOQCPNewaZD9E=
 go.etcd.io/etcd/api/v3 v3.5.0/go.mod h1:cbVKeC6lCfl7j/8jBhAK6aIYO9XOjdptoxU/nLQcPvs=
